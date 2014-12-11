@@ -15,3 +15,6 @@ what needs to be done:
 textbooks:
 [DEPARTMENT(e.g CIS), courseID(e.g 110), link to tb(e.g http://example.com/cis110tb)]
 
+4. Calls to Penn Course Review API?
+If we want to add some api calls, we can fetch some data about the specific course from Penn Course Review
+
