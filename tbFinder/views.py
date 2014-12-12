@@ -1,4 +1,5 @@
 from tbFinder import app
+import tbFinder.db_methods
 from flask import Flask, render_template, request
 
 @app.route('/allCourses')
@@ -23,8 +24,11 @@ def course(dept, course_id=None):
 def add():
 	return render_template('add.html')
 
-#TODO: should be post only
-@app.route('/addLink')
+#TODO: should be changed to post only
+@app.route('/addLink', methods=['POST', 'GET'])
 def addLink():
-	# route to add link information to the db
+	# get posted info
+	for key, value in request.form.items():
+		print value
+	# add information in the forms to the db
 	return "todo"

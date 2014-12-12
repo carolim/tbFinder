@@ -1,14 +1,30 @@
-<body>
-	<h1>Please enter the following information:</h1>
-	<form method="post" action="/addLink">
-		Department: <br>
-		<input type="text" placeholder="eg. CIS"><br>
-		Course ID: <br>
-		<input type="text" placeholder="eg. 110"><br>
-		Name of Textbook: <br>
-		<input type="text" placeholder="eg. Algorithms by Sedgewick & Wayne"><br>
-		Link: <br>
-		<input type="text" placeholder="eg. http://illegal.com/algorithms"><br><br>
-		<input type="submit" id="submit">
-	</form>
-</body>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="static/bootstrap.css">
+	</head>
+	<body>
+		<h1>Please enter the following information:</h1>
+		<form method="post" action="/addLink" id="submitLink">
+			Department Code: <br>
+			<input type="text" name="dept" placeholder="eg. CIS"><br>
+			Course ID: <br>
+			<input type="text" name="id" placeholder="eg. 110"><br>
+			Name of Textbook: <br>
+			<input type="text" name="tb_name" placeholder="eg. Algorithms by Sedgewick & Wayne"><br>
+			Link: <br>
+			<input type="text" name="tb_link" placeholder="eg. http://illegal.com/algorithms"><br><br>
+			<input type="submit">
+		</form>
+	</body>
+</html>
+
+<script>
+  // TODO: fix this why isn't it working :(
+  var visible = true;
+  $(document).ready(function() {
+	  $("#submitLink").submit(function(e) {
+		  alert( "Handler for .submit() called." );
+		  e.preventDefault();
+	  });
+  });
+</script>
