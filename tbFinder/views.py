@@ -1,4 +1,5 @@
-import tbFinder.db
+import tbFinder.db as db
+import json
 from tbFinder import app
 from flask import Flask, render_template, request
 
@@ -9,26 +10,26 @@ def allCourses():
     all_courses = {'CIS': ['110', '120', '121'], 'STSC': ['001', '100']}
     return render_template('allcourses.html', all_courses=all_courses)
 
+
 @app.route('/course/<dept>')
 @app.route('/course/<dept>/<course_id>')
 def course(dept, course_id=None):
 	if (course_id==None):
-		# only dept specified
-		# call to method to fetch all courses from db, e.g from STSC
-		return "No course id!"
+		results = db.get_all_dept_links(dept)
+		return render_template('dept_results.html', dept=dept,
+								results=json.loads(results))
 	else:	
-		# call to method to fetch particular course from db, i.e STSC 001
-		return "Params: %s" % dept
+		results = db.get_all_course_links(dept, course_id)
+		return render_template('courseid_results.html', dept=dept,
+								course_id=course_id, results=json.loads(results))
+
 
 @app.route('/add')
 def add():
 	return render_template('add.html')
 
-#TODO: should be changed to post only
-@app.route('/addLink', methods=['POST', 'GET'])
+
+@app.route('/addLink', methods=['POST'])
 def addLink():
-	# get posted info
-	for key, value in request.form.items():
-		print value
-	# add information in the forms to the db
-	return "todo"
+	db.add_tb_info(request.form)
+	return render_template('success.html')
