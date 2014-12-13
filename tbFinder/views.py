@@ -1,5 +1,5 @@
+import tbFinder.db
 from tbFinder import app
-import tbFinder.db_methods
 from flask import Flask, render_template, request
 
 @app.route('/allCourses')

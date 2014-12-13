@@ -1,2 +1,0 @@
-def insert():
-	print 'inserted'
