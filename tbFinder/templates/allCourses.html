@@ -1,0 +1,25 @@
+{% extends "main.html" %}
+
+{% block head%}
+<div class = "header">
+<h1>Textbook Finder!</h1>
+</div>
+{% endblock %}
+
+
+{% block content%}
+<div class = "courseInfo">
+	{% for dept, course in all_courses.iteritems() %}
+		<a href="/course/{{dept}}"><h1>{{ dept }}</h1></a>
+		{% for course_id in course %}
+			<li><a href="/course/{{dept}}/{{course_id}}">{{ course_id }}</a></li>
+		{% endfor %}
+	{% endfor %}
+	<br><br>
+</div>
+
+<div class = "clickHere">
+	<h4>Want to post a link to a textbook? Click <a href ="/add">here</h4>
+	<h4>Click <a href="/report">here</a> to report a link as broken.</h4>
+</div>
+{% endblock %}
