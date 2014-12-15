@@ -4,6 +4,7 @@ import json
 
 DATABASE = 'data.db'
 
+# custom decorators for sorting & debugging
 def debug(f):
 	def new_f(*args):
 		result = f(*args)
@@ -28,7 +29,7 @@ def add_tb_info(form):
 	return name + " successfully added to the textbooks database!"
 
 
-# returns a dictionary in the form {'deptname': [list of course codes]}
+# returns a sorted dictionary in the form {'deptname': [list of course codes]}
 @debug
 def get_all_course_codes():
 	conn = sqlite3.connect(DATABASE)
@@ -91,10 +92,22 @@ def get_all_course_links(dept, course_id):
 					 	name=result[3], link=result[4]))
 	return json.dumps(l)
 
-#TODO: need to fix this
-def remove_from_db(link):
+
+@debug
+def search(query):
 	conn = sqlite3.connect(DATABASE)
 	c = conn.cursor()
-	c.execute('''delete from textbooks where link=?''', (link,))
+
+	cursor = c.execute('''
+		select * from textbooks where code like ?''',
+		(int(query),))
+	results = cursor.fetchall()
 	conn.close()
+	
+	l = []
+	for result in results:
+		l.append(dict(dept=result[1], code=result[2],
+					name=result[3], link=result[4]))
+	return l
+
 

@@ -1,7 +1,9 @@
 import tbFinder.db as db
 import json
+import random
 from tbFinder import app
 from flask import Flask, render_template, redirect, request
+
 
 @app.route('/allCourses')
 def allCourses():
@@ -36,3 +38,26 @@ def addLink():
 @app.errorhandler(404)
 def page_not_found(e):
 	return render_template('404.html'), 404
+
+
+@app.route('/explore')
+def explore():
+	results = db.get_all_course_codes()
+	dept_list = list(results.keys())
+	# randomly pick a dept to go to
+	selected_dept = random.choice(dept_list)
+	return redirect('/course/' + selected_dept)
+
+
+@app.route('/search', methods=['POST', 'GET'])
+def search():
+	query = request.form.get('query')
+	# make query to db
+	results = db.search(query)
+	if len(results) == 0:
+		print "no results found"
+		return render_template('results.html', query=query,
+								results="null")
+	else:
+		return render_template('results.html', query=query,
+								results=results)

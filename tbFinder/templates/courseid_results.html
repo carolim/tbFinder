@@ -1,4 +1,8 @@
 <body>
+	<form method="post" action="/search" id="searchBar">
+		<input type="text" name="query" placeholder="search for another course number eg. 212"><br>
+		<input type="submit">
+	</form>
 	<h1>{{ dept }} {{ course_id }}</h1>
 	<br>
 	{% for result in results %}
