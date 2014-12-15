@@ -4,8 +4,16 @@ import json
 
 DATABASE = 'data.db'
 
+def debug(f):
+	def new_f(*args):
+		result = f(*args)
+		print "result of method call: " + str(result)
+		return result
+	return new_f
+
 
 # adds a textbook to the db
+@debug
 def add_tb_info(form):
 	conn = sqlite3.connect(DATABASE)
 	c = conn.cursor()
@@ -17,9 +25,11 @@ def add_tb_info(form):
 				(dept, code, name, link));
 	conn.commit()
 	conn.close()
+	return name + " successfully added to the textbooks database!"
 
 
 # returns a dictionary in the form {'deptname': [list of course codes]}
+@debug
 def get_all_course_codes():
 	conn = sqlite3.connect(DATABASE)
 	c = conn.cursor()
@@ -41,6 +51,7 @@ def get_all_course_codes():
 
 
 # returns results for a particular dept
+@debug
 def get_all_dept_links(dept):
 	conn = sqlite3.connect(DATABASE)
 	c = conn.cursor()
@@ -63,6 +74,7 @@ def get_all_dept_links(dept):
 
 
 # returns results for a particular course within a particular dept
+@debug
 def get_all_course_links(dept, course_id):
 	conn = sqlite3.connect(DATABASE)
 	c = conn.cursor()
@@ -85,5 +97,4 @@ def remove_from_db(link):
 	c = conn.cursor()
 	c.execute('''delete from textbooks where link=?''', (link,))
 	conn.close()
-
 
