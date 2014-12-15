@@ -1,0 +1,11 @@
+{% extends "main.html" %}
+
+{% block content%}
+<body>
+	<h1>{{ dept }}</h1>
+	<br>
+	{% for result in results %}
+		<li>{{ result }}</li>
+	{% endfor %}
+</body>
+{% endblock %}
