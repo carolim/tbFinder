@@ -1,0 +1,20 @@
+{% extends "main.html" %}
+
+
+{% block title %}TextBook Finder{% endblock %}
+
+
+{% block head%} {% endblock%}
+
+{% block content%}
+<div class = "home">
+	<h1> Welcome to Textbook Finder!</h1>
+<form action="/valiadate" method="POST">
+    Email: <input type="text" name="email" size="40"><br/>
+    <input type="submit" value="Submit">
+</form>
+</div>
+{% endblock%}
+
+
+
