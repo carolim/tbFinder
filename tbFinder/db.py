@@ -4,10 +4,8 @@ import json
 
 DATABASE = 'data.db'
 
-# we need methods to:
-# delete tb info
-# fetch all textbooks corresponding to a particular dept
-# fetch all textbooks corresponding to a particular dept AND course
+
+# adds a textbook to the db
 def add_tb_info(form):
 	conn = sqlite3.connect(DATABASE)
 	c = conn.cursor()
@@ -21,6 +19,28 @@ def add_tb_info(form):
 	conn.close()
 
 
+# returns a dictionary in the form {'deptname': [list of course codes]}
+def get_all_course_codes():
+	conn = sqlite3.connect(DATABASE)
+	c = conn.cursor()
+	cursor = c.execute('''select * from textbooks''')
+	results = cursor.fetchall()
+	conn.close()
+	
+	d = {}
+
+	for result in results:
+		dept = result[1].strip()
+		course_code = result[2]
+		if dept not in d:
+			d[dept] = [course_code]
+		else:
+			if course_code not in d[dept]:
+				d[dept].append(course_code)
+	return d
+
+
+# returns results for a particular dept
 def get_all_dept_links(dept):
 	conn = sqlite3.connect(DATABASE)
 	c = conn.cursor()
@@ -29,11 +49,20 @@ def get_all_dept_links(dept):
 		(dept,))
 	results = cursor.fetchall()
 	conn.close()
-	print json.dumps({"results": results})
-	return json.dumps(results)
+
+	d = {}
+
+	for result in results:
+		course_code = result[2]
+		if course_code not in d:
+			d[course_code] = [dict(name=result[3], link=result[4])]
+		else:
+			d[course_code].append(dict(name=result[3], link=result[4]))
+
+	return d
 
 
-# returns results for a particular course within a dept
+# returns results for a particular course within a particular dept
 def get_all_course_links(dept, course_id):
 	conn = sqlite3.connect(DATABASE)
 	c = conn.cursor()
@@ -42,6 +71,19 @@ def get_all_course_links(dept, course_id):
 		(dept, course_id))
 	results = cursor.fetchall()
 	conn.close()
-	return json.dumps(results)
+
+	l = []
+
+	for result in results:
+		l.append(dict(dept=result[1], code=result[2],
+					 	name=result[3], link=result[4]))
+	return json.dumps(l)
+
+#TODO: need to fix this
+def remove_from_db(link):
+	conn = sqlite3.connect(DATABASE)
+	c = conn.cursor()
+	c.execute('''delete from textbooks where link=?''', (link,))
+	conn.close()
 
 
