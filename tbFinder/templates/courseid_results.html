@@ -1,0 +1,14 @@
+{% extends "main.html" %}
+
+{% block content%}
+<body>
+	<h1>{{ dept }} {{ course_id }}</h1>
+	<br>
+	{% for result in results %}
+		<a href = "{{ result.link }}">{{ result.name }}</a>
+		<br>
+	{% endfor %}
+	<br>
+	Click <a href="/broken">here</a> to report a link as broken.
+</body>
+{% endblock %}
