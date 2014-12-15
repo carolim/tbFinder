@@ -87,3 +87,20 @@ def remove_from_db(link):
 	conn.close()
 
 
+def search(query):
+	conn = sqlite3.connect(DATABASE)
+	c = conn.cursor()
+
+	cursor = c.execute('''
+		select * from textbooks where code like ?''',
+		(query,))
+	results = cursor.fetchall()
+	conn.close()
+	
+	l = []
+	for result in results:
+		l.append(dict(dept=result[1], code=result[2],
+					name=result[3], link=result[4]))
+	return l
+
+
