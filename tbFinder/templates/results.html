@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+
+{% block content %}
+<body>
+	{% if results == "null" %}
+		<h1>We're sorry. No results were found for your query!</h1><br>
+		Click <a href="/allCourses">here</a> to go back to the main page.
+	{% elif results == "notanint" %}
+		<h1>We're sorry. Right now, we're only supporting queries made on course codes 'eg. 110'</h1><br>
+		Click <a href="/allCourses">here</a> to go back to the main page.
+	{% else %}
+		<h1>The following results were found for your query '{{ query }}':</h1><br>
+		{% for result in results %}
+			{{result.dept}} {{result.code}}: <a href="{{result.link}}">{{result.name}}</a><br>
+		{% endfor %}
+	{% endif %}
+</body>
+{% endblock %}
