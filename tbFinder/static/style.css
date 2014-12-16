@@ -1,0 +1,95 @@
+h1{
+	color: #FF9664;
+	font-family: Helvetica;
+	font-size: 40px;
+	text-shadow: 2px 2px #ff0000;
+}
+
+h2{
+	color: #FF9664;
+	font-size: 30px;
+	text-shadow: 1px 1px #ff0000;
+}
+
+
+.home {
+	text-align: center;
+	vertical-align: middle;
+    background-color: #6FB8FF;
+    position: absolute;
+    height: 200px;
+    width: 400px;
+    margin: -100px 0 0 -200px;
+    top: 50%;
+    left: 50%;
+}
+
+
+.content{
+	background-color: #6FB8FF;
+	text-align: center;
+	vertical-align: middle;    
+	position: absolute;
+    height: 200px;
+    width: 400px;
+    margin: -100px 0 0 -200px;
+    top: 50%;
+    left: 50%;
+}
+
+body{
+	background-color: #6FB8FF;
+}
+
+.header{
+	text-align: center;
+	vertical-align: text-top;
+	top: 10%;
+    left: 50%;
+}
+
+.courseInfo{
+	text-align: center;
+	vertical-align: top;
+    background-color: #6FB8FF;
+}
+
+.header{
+	background-color: #6FB8FF;
+	vertical-align: top;
+	text-align: center;
+}
+
+.clickHere{
+	vertical-align: bottom;
+	text-align: center;
+}
+
+.submitBook{
+	background-color: #6FB8FF;
+	text-align: center;
+	vertical-align: middle;  
+}
+
+.report{
+	color: #FF9664;
+	font-size: 30px;
+	text-shadow: 1px 1px #ff0000;
+	text-align: center;
+}
+
+
+form{
+	font-family: Helvetica;
+	color: #FF9664;
+	text-shadow: 1px 1px #ff0000;
+	font-size: 24px;
+}
+
+footer{
+	text-align: right;
+	vertical-align: top;    
+}
+
+
+
