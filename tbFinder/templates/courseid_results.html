@@ -1,4 +1,11 @@
-<body>
+{% extends "main.html" %}
+
+{% block content%}
+
+Search:<form method="post" action="/search" id="searchBar"><input type="text" name="query" placeholder="search for another course number eg. 212"><br><input type="submit">
+</form>
+
+<div class = "content">
 	<h1>{{ dept }} {{ course_id }}</h1>
 	<br>
 	{% for result in results %}
@@ -6,5 +13,6 @@
 		<br>
 	{% endfor %}
 	<br>
-	Click <a href="/broken">here</a> to report a link as broken.
-</body>
+	Click <a href="/report">here</a> to report a link as broken.
+</div>
+{% endblock %}
