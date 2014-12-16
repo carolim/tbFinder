@@ -1,5 +1,9 @@
-<html>
-	<body>
+{% extends "main.html" %}
+
+{% block header%}{% endblock%}
+
+{% block content%}
+<div class = "submitBook">
 		<h1>Please enter the following information:</h1>
 		<form method="post" action="/addLink" id="submitLink">
 			Department Code: <br>
@@ -12,16 +16,5 @@
 			<input type="text" name="tb_link" placeholder="eg. http://illegal.com/algorithms"><br><br>
 			<input type="submit">
 		</form>
-	</body>
-</html>
-
-<script>
-  // TODO: fix this why isn't it working :(
-  var visible = true;
-  $(document).ready(function() {
-	  $("#submitLink").submit(function(e) {
-		  alert( "Handler for .submit() called." );
-		  e.preventDefault();
-	  });
-  });
-</script>
+	</div>
+{% endblock %}
