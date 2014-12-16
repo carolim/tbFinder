@@ -1,0 +1,10 @@
+{% extends "main.html" %}
+
+{% block content%}
+<div class = "content">
+	<h2>Success {{ name }}!<h2/>
+	<form action="/allCourses" method="GET">
+	<input type="submit" value="Go to all Courses!">
+	</form>
+</div>
+{% endblock%}
